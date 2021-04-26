@@ -1,0 +1,744 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Explaining in Style: Training a GAN to explain a classifier in StyleSpace</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script>
+        function play_vid(tag) {
+        vid = document.getElementById(tag)
+        if (vid.paused) 
+          vid.play();
+        else 
+          vid.pause(); 
+      }
+      function play_all() {
+        vids = document.getElementsByTagName('video')
+        play = vids[0].paused
+        for (i = 0; i < vids.length; i++) {
+          if (play) {
+            vids[i].play(); 
+          }
+          else 
+            vids[i].pause(); 
+        }
+      }
+    </script>
+</head>
+
+<body>
+    <button class="bottom" onclick="play_all();">Play/Pause All</button>
+    <div class="container">
+        <h1 align="center">Explaining in Style: Training a GAN to explain a classifier in StyleSpace</h1>
+        <h2 align="center">Supplementary Material</h2>
+        <!-- <p align="center">&nbsp;</p>
+        <h2 align="left">
+            <font color="red">Click
+                <button onclick="play_all();">Play/Pause All</button>
+                on the bottom-right to play and pause all the videos.</font>
+        </h2> -->
+        <p align="center">&nbsp;</p>
+        <ul>
+            <!-- TODO: #hashtags -->
+            <li><a href="#image"><b>Using StylEx for image-specific explanation</b></a></li>
+            <li><a href="#attributes"><b>Top automatically detected attributes for various domains</b></a></li>
+            <ul><a href="#attributes_1">1. Perceived Gender Classifier</a></ul>
+            <ul><a href="#attributes_2">2. Perceived Age Classifier</a></ul>
+            <ul><a href="#attributes_6">3. Cats / Dogs Classifier</a></ul>
+            <ul><a href="#attributes_3">4. Healthy / Sick Leaves Classifier</a></ul>
+            <ul><a href="#attributes_4">5. Retinal Fundus Classifier</a></ul>
+            <!-- <ul><a href="#attributes_5">6. Wild Cats Classifier</a></ul> -->
+            <li><a href="#user_study"><b>User study</b></a></li>
+            <ul><a href="#user_1">1. Classification study</a></ul>
+            <ul><a href="#user_2">2. Verbal descriptions study</a></ul>
+        </ul>
+        <p align="left">&nbsp;</p>
+        <hr>
+        <hr>
+        <a name="image"></a>
+        <h3 align="left">Using StylEx for image-specific explanation (See Section 3.4 in the paper)</h3>
+        <h2 align="center">
+            <font color="red">Click
+                <button onclick="play_all();">Play/Pause All</button>
+                on the bottom-right to play and pause all the videos.</font>
+        </h2>
+        <p align="left">&#8226; Top automatically detected attributes for explaining the percieved age classification on a specific image.</p>
+        <p>&#8226; Each knob corresponds to one of the top discovered attributes in the image. Moving the knobs causes StylEx to change <b>only</b> this attribute in this image.</p>
+        <p>&#8226; The probabilities on the top left corner are for the person to be percieved as old.</p>
+        <p>&#8226; The user of StylEx can use these manipulations to infer the semantic meanings of each attribute (demonstrated on the right).</p>
+        <p align="center"><video id="demo" autoplay="autoplay" controls="controls" loop="loop">
+                <source src="assets/ux_mockup.mp4" type="video/mp4" />
+                Your browser does not support the video tag. </video>
+        </p>
+        <!-- </p>
+        <p align="center">
+            <button onclick="play_vid('demo');">Play/Pause</button>
+        </p> -->
+        <hr>
+        <hr>
+        <a name="attributes"></a>
+        <h3 align="left">Top automatically detected attributes for different classifiers on various domains</h3>
+        <p align="left">For each attribute we flicker between the source and attribute-manipulated image.</p>
+
+        <p align="left">&#8226; <b>"ORIGINAL"</b> is the source image.</p>
+        <p align="left">&#8226; <b>"MODIFIED"</b> is the result of modifying the attribute (increasing/decreasing the attribute value) in the source image.</p>
+
+        <hr>
+        <h2 align="center">
+            <font color="red">Click
+                <button onclick="play_all();">Play/Pause All</button>
+                on the bottom-right to play and pause all the videos.</font>
+        </h2>
+        <a name="attributes_1"></a>
+        <h3 align="center" class="sub">Perceived Gender Classifier</h3>
+        <p align="center">(The probabilities on the top-left of each image are for being perceived as female)</p>
+        <table align="center" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #1:</b><br><span class="our_naming">("Stubble Beard")</span></p><video id="gender_2x2_1" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_1.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #2:</b><br><span class="our_naming">("Moustache")</span></p><video id="gender_2x2_2" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_2.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_1');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_2');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #3:</b><br><span class="our_naming">("Lipstick")</span></p><video id="gender_2x2_3" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_3.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #4:</b><br><span class="our_naming">("Eyebrow Thickness")</span></p><video id="gender_2x2_4" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_4.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_3');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_4');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #5:</b><br><span class="our_naming">("Nose Width")</span></p><video id="gender_2x2_5" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_5.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #6:</b><br><span class="our_naming">("Eye Makeup")</span></p><video id="gender_2x2_6" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_6.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_5');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_6');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #7:</b><br><span class="our_naming">("Bangs")</span></p><video id="gender_2x2_7" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_7.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #8:</b><br><span class="our_naming">("Raise Eyebrows")</span></p><video id="gender_2x2_8" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_8.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_7');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_8');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #9:</b><br><span class="our_naming">("Long Hair On Right Side")</span></p><video id="gender_2x2_9" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_9.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #10:</b><br><span class="our_naming">("Raise Eyelid & Eyelashes")</span></p><video id="gender_2x2_10" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_10.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_9');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_10');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <!-- <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #11:</b><br><span class="our_naming">("TODO")</span></p><video id="gender_2x2_11" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_11.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #12:</b><br><span class="our_naming">("TODO")</span></p><video id="gender_2x2_12" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/gender_2x2_12.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_11');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('gender_2x2_12');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+        <hr>
+        <a name="attributes_2"></a>
+        <h3 align="center" class="sub">Perceived Age Classifier</h3>
+        <p align="center">(The probabilities on the top-left of each image are for being perceived as young)</p>
+        <table align="center" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #1:</b><br><span class="our_naming">("Eyeglass Lenses")</span></p><video id="age_2x2_1" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_1.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #2:</b><br><span class="our_naming">("Full Smile")</span></p><video id="age_2x2_2" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_2.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_1');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_2');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #3:</b><br><span class="our_naming">("Receding Hair Line")</span></p><video id="age_2x2_3" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_3.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #4:</b><br><span class="our_naming">("Bangs")</span></p><video id="age_2x2_4" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_4.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_3');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_4');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #5:</b><br><span class="our_naming">("Thick Eyebrows")</span></p><video id="age_2x2_5" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_5.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #6:</b><br><span class="our_naming">("Bags Under Eyes")</span></p><video id="age_2x2_6" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_6.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_5');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_6');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #7:</b><br><span class="our_naming">("Dropping Nose Tip")</span></p><video id="age_2x2_7" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_7.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #8:</b><br><span class="our_naming">("Upper Lip Width")</span></p><video id="age_2x2_8" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_8.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_7');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_8');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #9:</b><br><span class="our_naming">("Thinning Hair")</span></p><video id="age_2x2_9" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_9.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #10:</b><br><span class="our_naming">("Smiling")</span></p><video id="age_2x2_10" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/age_2x2_10.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_9');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('age_2x2_10');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+        <hr>
+        <a name="attributes_6"></a>
+        <h3 align="center" class="sub">Cats / Dogs Classifier</h3>
+        <p align="center">(The probabilities on the top-left of each image are for being a dog)</p>
+        <table align="center" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #1:</b><br><span class="our_naming">("Mouth Open")</span></p><video id="cats_dogs_2x2_1" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/cats_dogs_2x2_1.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #2:</b><br><span class="our_naming">("Ear is Dropped/Pointed")</span></p><video id="cats_dogs_2x2_2" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/cats_dogs_2x2_2.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('cats_dogs_2x2_1');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('cats_dogs_2x2_2');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #3:</b><br><span class="our_naming">("Eye Circumference")</span></p><video id="cats_dogs_2x2_3" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/cats_dogs_2x2_3.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #4:</b><br><span class="our_naming">("Eye Shape")</span></p><video id="cats_dogs_2x2_4" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/cats_dogs_2x2_4.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('cats_dogs_2x2_3');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('cats_dogs_2x2_4');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <!--
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #5:</b><br><span class="our_naming">("Eye brightness")</span></p><video id="cats_dogs_2x2_5" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/cats_dogs_2x2_5.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #6:</b><br><span class="our_naming">("Eye Shape again")</span></p><video id="cats_dogs_2x2_6" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/cats_dogs_2x2_6.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <button onclick="play_vid('cats_dogs_2x2_5');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('cats_dogs_2x2_6');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr>
+-->
+            </tbody>
+        </table>
+        <hr>
+        <a name="attributes_3"></a>
+        <h3 align="center" class="sub">Healthy / Sick Leaves Classifier</h3>
+        <p align="center">(The probabilities on the top-left of each image are for being healthy)</p>
+        <table align="center" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #1:</b><br><span class="our_naming">("Base Leaf Color")</span></p><video id="plants1" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/plants1.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #2:</b><br><span class="our_naming">("Rotten Apex")</span></p><video id="plants2" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/plants2.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('plants1');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('plants2');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #3:</b><br><span class="our_naming">("Spots")</span></p><video id="plants3" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/plants3.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #4:</b><br><span class="our_naming">("Blight on leaf bottom")</span></p><video id="plants4" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/plants4.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <a name="attributes_4"></a>
+        <h3 align="center" class="sub">Retinal Fundus Classifier</h3>
+        <p align="center">(The probabilities on the top-left of each image are for having DME)</p>
+        <table align="center" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #1:</b><br><span class="our_naming">("Exudates")</span></p><video id="retina_2x2_1" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/retina_2x2_1.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #2:</b><br><span class="our_naming">("Cotton Wool")</span></p><video id="retina_2x2_2" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/retina_2x2_2.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('retina_2x2_1');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('retina_2x2_2');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #3:</b><br><span class="our_naming">("Hemorrhages")</span></p><video id="retina_2x2_3" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/retina_2x2_3.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #4:</b><br><span class="our_naming">("Clustered Exudates")</span></p><video id="retina_2x2_4" class="pairs" autoplay="autoplay" loop="loop">
+                            <source src="assets/retina_2x2_4.mp4" type="video/mp4" />
+                            Your browser does not support the video tag. </video>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td align="center">
+                        <button onclick="play_vid('retina_2x2_3');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <button onclick="play_vid('retina_2x2_4');">Play/Pause</button>
+                        <p>
+                        </p>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+        <hr>
+        <hr>
+        <a name="user_study"></a>
+        <h3>User Study (Section 4.2.3 in the paper)</h3>
+        <p>We performed an <u>extensive</u> user study using Amazon Mechanical Turk for 4 different classifiers. For each classifier, we checked the "coherence" and "distinctness" for each of its multiple detected attributes (see paper of details).</p>
+        <p>
+        Here we show only a few examples of the kind of questions posed to the users and the type of answers they provided:</p>
+        <hr>
+        <a name="user_1"></a>
+        <h3 align="center" class="sub">Classification Study (showing only one example for a perceived gender survey)</h3>
+        <p><b>Instructions</b>:</p>
+        <p>For each of the questions below:</p>
+        <p>1) Look at the animations on the left. Both are examples of the same transformation. </p>
+        <p>2) Then look at the two candidates on the right, A and B.</p>
+        <p>3) Choose which one does a similar transformation to those on the left.</p>
+        <table class="user">
+            <tbody>
+                <tr>
+                    <td>
+                        <img src='user_study/form_0_q_0.gif' width='50%'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Correct answer:</b> B
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Accuracy:</b> 10/10 users were correct.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src='user_study/form_0_q_1.gif' width='50%'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Correct answer:</b> B
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Accuracy:</b> 10/10 users were correct.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src='user_study/form_0_q_2.gif' width='50%'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Correct answer:</b> A
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Accuracy:</b> 9/10 users were correct.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src='user_study/form_0_q_3.gif' width='50%'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Correct answer:</b> B
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Accuracy:</b> 10/10 users were correct.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <a name="user_2"></a>
+        <h3 align="center" class="sub">Verbal Description Study (showing examples for a perceived age and cats/dogs survey)</h3>
+        <p><b>Instructions</b>:</p>
+        <p>For each of the questions below:</p>
+        <p> 1) Look at the animation. </p>
+        <p> 2) Describe in 1-4 words the single most prominent attribute that changes for all images. </p>
+        <!-- <p> 3) If the animation does not describe a change in a single attribute that can be easily described by words then check the box saying "The attribute is hard to describe by words". </p> -->
+        <table class="user">
+            <tbody>
+                <tr>
+                    <td>
+                        <img src='user_study/att1_ours_age.gif' width='50%'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Users description:</b> eyeglasses become narrow, glasses, bigger glasses, glasses become smaller, Glasses get larger, Glasses size.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Most common word:</b> glasses (6/6)
+                        <p></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src='user_study/att2_ours_age.gif' width='50%'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Users description:</b> smiles include teeth, teeth, teeth showing, teeth disappear, Teeth are visible, Removing teeth.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Most common word:</b> teeth (6/6)
+                        <p></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src='user_study/att4_ours_age.gif' width='50%'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Users description:</b> eyebrows go dark, eyebrows, thinner eyebrows, eyebrows get thinner, Thicker eyebrows, Eyebrow thickness.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Most common word:</b> eyebrows (6/6)
+                        <p></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="user_study/cats_dogs_question1.gif" width="50%">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Users description:</b> Ears got lengthen, Ears becomes bigger, Cat&#39;s ear puffed up, Ear movement, Ears pricking.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Most common word:</b> Ears (5/5)
+                        <p></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="user_study/cats_dogs_question2.gif" width="50%">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Users description:</b> Cat opens mouth, Mouth and teeth opens, Meow sound, Open mouth, Mouth opening.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Most common word:</b> Mouth (4/5)
+                        <p></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="user_study/cats_dogs_question3.gif" width="50%">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Users description:</b> Pupil got bigger, Eyes of cat changes, Cat&#39;s eye chaging, Pupil shape, Pupils dilating.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Most common word:</b> Eye/Pupil (5/5)
+                        <p></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>
+        Explaining in Style: Training a GAN to explain a classifier in StyleSpace
+    </title>
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+</head>
+<body>
+    <p><span class="title">Explaining in Style: Training a GAN to explain a classifier in StyleSpace</span></p>
+    <br>
+    <p class="author">
+        <span class="author"><a target="_blank" href="https://research.google/people/105975/">Oran Lang</a>&nbsp;<sup>*</sup></span>
+        <span class="author"><a target="_blank" href="https://yossi.gandelsman.com/">Yossi Gandelsman</a>&nbsp;<sup>*</sup></span>
+        <span class="author"><a target="_blank" href="mailto:michalyarom@google.com">Michal Yarom</a>&nbsp;<sup>*</sup></span>
+        <span class="author"><a target="_blank" href="https://scholar.google.com/citations?user=hh5nOn4AAAAJ&hl=en">Yoav Wald</a>&nbsp;<sup>*</sup></span>
+        <span class="author"><a target="_blank" href="https://research.google/people/105719/">Gal Elidan</a></span>
+        <span class="author"><a target="_blank" href="https://research.google/people/105831/">Avinatan Hassidim</a></span>
+        <span class="author"><a target="_blank" href="https://billf.mit.edu/">William T. Freeman</a></span>
+        <br>
+        <span class="author"><a target="_blank" href="http://web.mit.edu/phillipi/">Phillip Isola</a></span>
+        <span class="author"><a target="_blank" href="http://www.cs.tau.ac.il/~gamir/">Amir Globerson</a></span>
+        <span class="author"><a target="_blank" href="http://www.weizmann.ac.il/math/irani/">Michal Irani</a></span>
+        <span class="author"><a target="_blank" href="https://research.google.com/pubs/InbarMosseri.html">Inbar Mosseri</a></span>
+    </p>
+    <br>
+    <table border="0" align="center" class="affiliations">
+        <tbody>
+            <tr>
+                <td colspan="4" align="center" style="font-size: 18px; vertical-align: super;"><img src="images/logo_research.png" height="40" style="vertical-align:middle" alt="">&nbsp;&nbsp;<a href="https://research.google.com/">Google Research</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container">
+        <p style="font-size: 14px" align="left">* Equal contributors.</p>
+        <table width="200" border="0" align="center">
+            <tbody>
+                <tr>
+                    <td colspan="3" align="center"><img src="Teaser/teaser.gif" width="950" alt="" style="margin-top:10px"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="200" border="0" align="center" style="table-layout: fixed; width: 100%">
+            <tbody>
+                <tr>
+                    <td colspan="4" class="caption"><p><br><b>Classifier-specific interpretable attributes emerge in the StylEx StyleSpace.</b> Our system, StylEx, explains the decisions of a classifier by discovering and visualizing multiple attributes that affect its prediction. (Left) StylEx achieves this by training a StyleGAN specifically to explain the classifier (e.g., a "cat vs. dog" classifier), thus driving latent attributes in the GAN's StyleSpace to capture classifier-specific attributes. (Right) We automatically discover top visual attributes in the StyleSpace coordinates, which best explain the classifier's decision. For each discovered attribute, StylEx can then provide an explanation by generating a counterfactual example, i.e., visualizing how manipulation of this attribute (style coordinate) affects the classifier output probability. The generated counterfactual examples are marked in the figure by the color of their attribute. The degree to which manipulating this attribute affects the classifier probability is shown in the top-left of each image. The top attributes found by our method indeed correspond to coherent semantic properties that affect perception of cats vs. dogs  (e.g. open or closed mouth, eye shape, and pointed or dropped ears).</p></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="section">&nbsp;</p>
+        <p><span class="section">Abstract</span></p>
+        <p>Image classification models can depend on multiple different semantic attributes of the image. An explanation of the decision of the classifier needs to both discover and visualize these properties. Here we present StylEx, a method for doing this, by training a generative model to specifically explain multiple attributes that underlie classifier decisions. A natural source for such attributes is the StyleSpace of StyleGAN, which is known to generate semantically meaningful dimensions in the image. However, because standard GAN training is not dependent on the classifier, it may not represent these attributes which are important for the classifier decision, and many dimensions of StyleSpace may represent irrelevant attributes. To overcome this, we propose a training procedure for a StyleGAN, which incorporates the classifier model, in order to learn a classifier-specific StyleSpace. Explanatory attributes are then selected from this space. These can be used to visualize the effect of changing multiple attributes per image, thus providing image-specific explanations. We apply StylEx to multiple domains, including animals, leaves, faces and retinal images. For these, we show how an image can be modified in different ways to change its classifier output. Our results show that the method finds attributes that align well with semantic ones, generate meaningful image-specific explanations, and are human-interpretable as measured in user-studies.<br>
+        </p>
+        <br>
+        <table width="200" border="0" align="center">
+            <tbody>
+                <tr>
+                    <td colspan="3" align="center"><img src="assets/ux_mockup_white_bg.gif" width="750" alt="" style="margin-top:10px"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table width="200" border="0" align="center" style="table-layout: fixed; width: 100%">
+            <tbody>
+                <tr>
+      <td colspan="4" class="caption"><p><br><b>Using StylEx for image-specific explanation.</b> StylEx can be used to explain classifier decision for a specific image. Here we show top 
+          automatically detected attributes for explaining the precieved age classification on a specific image. Each knob corresponds to one of the top discovered attributes in the image. Moving the knobs causes StylEx to change <b>only</b> this attribute in this image. The user of StylEx can use these manipulations to infer the semantic meanings of each attribute (demonstrated on the right). The probabilities on the top left corner are for the person to be percieved as old.</p></td>
+    </tr>
+            </tbody>
+        </table>
+        <br>
+        <table align="center" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #1:</b><br><span class="our_naming">("Exudates")</span></p><img class="pairs" src="assets/retina_2x2_1.gif">
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #2:</b><br><span class="our_naming">("Cotton Wool")</span></p>
+                        <img class="pairs" src="assets/retina_2x2_2.gif">
+                    </td>
+                    <td align="center" style="border-left: 2px dotted #444;">
+                        <p><b class="attribute_num">Attribute #1:</b><br><span class="our_naming">("Base leaf color")</span></p>
+                            <img class="pairs" src="assets/plants1.gif">
+                    </td>
+                    <td align="center">
+                        <p><b class="attribute_num">Attribute #2:</b><br><span class="our_naming">("Rotten Apex")</span></p><img class="pairs" src="assets/plants2.gif">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" class="caption">
+                        <b>(a) Top-2 automaticaly detected attributes for DME (retina disease) Classifier</b>
+                    </td>
+                    <td colspan="2" align="center" class="caption" style="border-left: 2px dotted #444;">
+                        <b>(b) Top-2 automaticaly detected attributes for Sick/Healthy Leaf Classifier</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="caption">
+                        <p><br><b>StylEx is applicable to a large variety of classifiers and real-world complex domains</b>, including animals, leaves, faces and retinal images.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="section">Paper</p>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td><a href="paper.pdf"><img src="images/paper.png" alt="" width="200"></a></td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <p><br><b>"Explaining in Style: Training a GAN to explain a classifier in StyleSpace",</b><br> Oran Lang*, Yossi Gandelsman*, Michal Yarom*, Yoav Wald*, Gal Elidan, Avinatan Hassidim, William T. Freeman, Phillip Isola, Amir Globerson, Michal Irani and Inbar Mosseri.</p>
+                        [<a href="paper.pdf">PDF</a>]
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="section">Supplementary Material:</p>
+        <table width="283" border="0">
+            <tbody>
+                <tr>
+                    <td width="165"><a href="supmat.html"><img src="images/supmat.png" alt="" width="207"></a></td>
+                    <td width="6">&nbsp;</td>
+                    <td width="56">
+                        [<a href="supmat.html">Link</a>]
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p></p>
+        <p class="section">&nbsp;</p>
+        <p align="center" class="date">Last updated: Apr 2021</p>
+    </div>
+</body>
+ -->
+</html>
