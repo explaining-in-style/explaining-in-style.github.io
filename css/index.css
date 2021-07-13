@@ -25,6 +25,10 @@ p a, table.affiliations a, table.menu a {
 	text-decoration: none;
 }
 
+.bibtex {
+	   font-family: monospace;
+}
+
 img.pairs {
 	height: 220px;
 }
